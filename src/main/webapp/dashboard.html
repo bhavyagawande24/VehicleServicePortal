@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vehicle Service Portal - Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        /* ================= HEADER ================= */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e8ebf1;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            color: #123b8e;
+            font-size: 20px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eaf2ff;
+
+            font-size: 21px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: #596579;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #1769e0;
+        }
+
+        .nav-logout {
+            color: #c62828;
+        }
+
+        .nav-logout:hover {
+            color: #a71919;
+        }
+
+        /* ================= MAIN ================= */
+
+        .page {
+            width: min(1120px, 92%);
+            margin: 0 auto;
+
+            padding: 48px 0 55px;
+        }
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome small {
+            color: #1769e0;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .welcome h1 {
+            margin: 7px 0 8px;
+
+            font-size: 34px;
+            line-height: 1.2;
+
+            color: #172033;
+        }
+
+        .welcome p {
+            margin: 0;
+
+            color: #68758a;
+            font-size: 15px;
+        }
+
+        /* ================= SUCCESS ================= */
+
+        .success {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-bottom: 28px;
+
+            padding: 7px 13px;
+
+            background: #ecfdf3;
+            border: 1px solid #c9f0d9;
+            border-radius: 20px;
+
+            color: #18794e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* ================= FEATURE BANNER ================= */
+
+        .service-banner {
+            min-height: 150px;
+
+            padding: 28px 32px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #123b8e,
+                    #1769e0
+                );
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            box-shadow:
+                0 10px 28px rgba(23, 105, 224, 0.16);
+
+            margin-bottom: 40px;
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .banner-icon {
+            width: 62px;
+            height: 62px;
+
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.14);
+
+            font-size: 31px;
+        }
+
+        .banner-text h2 {
+            margin: 0 0 6px;
+
+            font-size: 20px;
+        }
+
+        .banner-text p {
+            margin: 0;
+
+            color: #dbeafe;
+
+            font-size: 14px;
+        }
+
+        .banner-button {
+            flex-shrink: 0;
+
+            padding: 12px 19px;
+
+            border-radius: 9px;
+
+            background: white;
+            color: #1769e0;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .banner-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 7px 18px rgba(0, 0, 0, 0.16);
+        }
+
+        /* ================= SECTION TITLE ================= */
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 16px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+
+            font-size: 20px;
+            color: #172033;
+        }
+
+        .section-heading span {
+            color: #8994a6;
+            font-size: 13px;
+        }
+
+        /* ================= OPTIONS ================= */
+
+        .options {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .option {
+            min-height: 190px;
+
+            padding: 27px 24px;
+
+            background: white;
+
+            border: 1px solid #e5e9f0;
+
+            border-radius: 16px;
+
+            text-decoration: none;
+
+            color: #172033;
+
+            display: flex;
+            flex-direction: column;
+
+            transition:
+                transform 0.28s ease,
+                opacity 0.28s ease,
+                filter 0.28s ease,
+                box-shadow 0.28s ease,
+                border-color 0.28s ease;
+        }
+
+        .option-icon {
+            width: 49px;
+            height: 49px;
+
+            border-radius: 12px;
+
+            background: #edf4ff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+
+            margin-bottom: 21px;
+
+            transition:
+                transform 0.28s ease;
+        }
+
+        .option-title {
+            font-size: 17px;
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+        .option-description {
+            color: #778398;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            flex: 1;
+        }
+
+        .option-arrow {
+            margin-top: 18px;
+
+            color: #1769e0;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* THE EFFECT YOU WANTED */
+
+        .options:hover .option {
+            opacity: 0.42;
+            filter: grayscale(65%);
+        }
+
+        .options .option:hover {
+            opacity: 1;
+            filter: none;
+
+            transform: translateY(-5px);
+
+            border-color: #b8d2fa;
+
+            box-shadow:
+                0 12px 28px rgba(30, 64, 175, 0.12);
+        }
+
+        .option:hover .option-icon {
+            transform: scale(1.08);
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            margin-top: 45px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #e4e8ef;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: #8a95a6;
+
+            font-size: 12px;
+        }
+
+        .footer strong {
+            color: #667388;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .nav-right {
+                gap: 13px;
+            }
+
+            .nav-link {
+                font-size: 12px;
+            }
+
+            .page {
+                padding-top: 35px;
+            }
+
+            .welcome h1 {
+                font-size: 29px;
+            }
+
+            .service-banner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .banner-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .option {
+                min-height: 165px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .navbar {
+                height: 65px;
+            }
+
+            .brand {
+                font-size: 16px;
+            }
+
+            .brand-icon {
+                width: 33px;
+                height: 33px;
+                font-size: 18px;
+            }
+
+            .nav-link:not(.nav-logout) {
+                display: none;
+            }
+
+            .page {
+                width: 90%;
+            }
+
+            .service-banner {
+                padding: 23px;
+            }
+
+            .banner-left {
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header class="navbar">
+
+        <a href="dashboard.html" class="brand">
+
+            <span class="brand-icon">
+                🚗
+            </span>
+
+            Vehicle Service Portal
+
+        </a>
+
+        <nav class="nav-right">
+
+            <a
+                href="dashboard.html"
+                class="nav-link"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="my-bookings"
+                class="nav-link"
+            >
+                My Bookings
+            </a>
+
+            <a
+                href="logout"
+                class="nav-link nav-logout"
+            >
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <main class="page">
+
+        <section class="welcome">
+
+            <div class="success">
+                ✓ Login successful
+            </div>
+
+            <small>
+                VEHICLE SERVICE MANAGEMENT
+            </small>
+
+            <h1>
+                Welcome back 👋
+            </h1>
+
+            <p>
+                Manage your vehicles and schedule services
+                from one place.
+            </p>
+
+        </section>
+
+
+        <!-- SERVICE BANNER -->
+
+        <section class="service-banner">
+
+            <div class="banner-left">
+
+                <div class="banner-icon">
+                    🔧
+                </div>
+
+                <div class="banner-text">
+
+                    <h2>
+                        Need a vehicle service?
+                    </h2>
+
+                    <p>
+                        Book your next service appointment
+                        quickly and easily.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <a
+                href="book-service-page"
+                class="banner-button"
+            >
+                Book Service →
+            </a>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="section-heading">
+
+            <h2>
+                Quick Actions
+            </h2>
+
+            <span>
+                Choose what you'd like to do
+            </span>
+
+        </div>
+
+
+        <section class="options">
+
+
+            <a
+                href="add-vehicle.html"
+                class="option"
+            >
+
+                <div class="option-icon">
+                    🚘
+                </div>
+
+                <div class="option-title">
+                    Add Vehicle
+                </div>
+
+                <div class="option-description">
+                    Add your vehicle details and
+                    keep your vehicle information organized.
+                </div>
+
+                <div class="option-arrow">
+                    Add vehicle →
+                </div>
+
+            </a>
+
+
+            <a
+                href="book-service-page"
+                class="option"
+            >
+
+                <div class="option-icon">
+                    🔧
+                </div>
+
+                <div class="option-title">
+                    Book Vehicle Service
+                </div>
+
+                <div class="option-description">
+                    Schedule a service appointment
+                    for your vehicle.
+                </div>
+
+                <div class="option-arrow">
+                    Book now →
+                </div>
+
+            </a>
+
+
+            <a
+                href="my-bookings"
+                class="option"
+            >
+
+                <div class="option-icon">
+                    📋
+                </div>
+
+                <div class="option-title">
+                    My Service Bookings
+                </div>
+
+                <div class="option-description">
+                    View your existing appointments
+                    and booking information.
+                </div>
+
+                <div class="option-arrow">
+                    View bookings →
+                </div>
+
+            </a>
+
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <span>
+                Vehicle Service Portal
+            </span>
+
+            <span>
+                <strong>Service made simple.</strong>
+            </span>
+
+        </footer>
+
+    </main>
+
+</body>
+
+</html>

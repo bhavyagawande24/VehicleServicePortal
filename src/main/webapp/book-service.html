@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Vehicle Service</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Vehicle Service Portal</h1>
+
+        <h2>Book a Service</h2>
+
+        <form action="book-service" method="post">
+
+            <label>Vehicle ID</label>
+
+            <input type="number"
+                   name="vehicleId"
+                   placeholder="Enter your vehicle ID"
+                   required>
+
+            <label>Service Type</label>
+
+            <select name="serviceType" required>
+
+                <option value="">Select Service</option>
+
+                <option value="Oil Change">
+                    Oil Change
+                </option>
+
+                <option value="General Service">
+                    General Service
+                </option>
+
+                <option value="Brake Service">
+                    Brake Service
+                </option>
+
+                <option value="Engine Service">
+                    Engine Service
+                </option>
+
+                <option value="AC Service">
+                    AC Service
+                </option>
+
+                <option value="Full Service">
+                    Full Service
+                </option>
+
+            </select>
+
+            <label>Booking Date</label>
+
+            <input type="date"
+                   name="bookingDate"
+                   required>
+
+            <button type="submit">
+                Book Service
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
