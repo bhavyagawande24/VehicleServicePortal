@@ -5,304 +5,1919 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Login - Vehicle Service Portal</title>
+    <title>VehicleServicePortal</title>
+
 
     <style>
 
+        /* =========================================
+           RESET
+        ========================================= */
+
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            margin: 0;
             min-height: 100vh;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: #030708;
 
-            padding: 20px;
+            color: #ffffff;
 
-            font-family: Arial, Helvetica, sans-serif;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-            background: linear-gradient(
-                135deg,
-                #eef4ff,
-                #dbeafe
-            );
-
-            color: #1e293b;
+            overflow-x: hidden;
         }
 
-        .login-container {
-            width: 100%;
-            max-width: 430px;
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .logo-icon {
-            font-size: 55px;
-        }
-
-        .logo h1 {
-            margin: 8px 0 0;
-
-            color: #1e3a8a;
-
-            font-size: 30px;
-        }
-
-        .logo p {
-            margin-top: 8px;
-
-            color: #64748b;
-        }
-
-        .login-card {
-            background: white;
-
-            padding: 35px;
-
-            border-radius: 18px;
-
-            box-shadow:
-                0 12px 35px
-                rgba(30, 58, 138, 0.15);
-        }
-
-        .login-card h2 {
-            margin-top: 0;
-
-            text-align: center;
-
-            color: #1e3a8a;
-        }
-
-        .subtitle {
-            text-align: center;
-
-            color: #64748b;
-
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-
-            margin-top: 16px;
-            margin-bottom: 7px;
-
-            font-weight: bold;
-
-            color: #334155;
-        }
-
-        input {
-            width: 100%;
-
-            padding: 13px 14px;
-
-            border: 1px solid #cbd5e1;
-
-            border-radius: 9px;
-
-            background: #f8fafc;
-
-            font-size: 16px;
-
-            outline: none;
-
-            transition: 0.2s;
-        }
-
-        input:focus {
-            border-color: #2563eb;
-
-            background: white;
-
-            box-shadow:
-                0 0 0 3px
-                rgba(37, 99, 235, 0.12);
-        }
-
-        button {
-            width: 100%;
-
-            margin-top: 25px;
-
-            padding: 14px;
-
-            border: none;
-
-            border-radius: 9px;
-
-            background: #2563eb;
-
-            color: white;
-
-            font-size: 17px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        button:hover {
-            background: #1d4ed8;
-
-            transform: translateY(-1px);
-        }
-
-        .register {
-            text-align: center;
-
-            margin-top: 25px;
-
-            color: #64748b;
-        }
-
-        .register a {
-            color: #2563eb;
-
-            font-weight: bold;
-
+        a {
+            color: inherit;
             text-decoration: none;
         }
 
-        .register a:hover {
-            color: #1e3a8a;
 
-            text-decoration: underline;
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
+        .navbar {
+
+            height: 90px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 4.5%;
+
+            position: relative;
+
+            z-index: 50;
+
+            background:
+                rgba(3, 8, 10, 0.94);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.06);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
 
-        .admin-link {
-            text-align: center;
+
+        /* LOGO */
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.8px;
+        }
+
+
+        .logo-car {
+
+            width: 48px;
+            height: 32px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #ffffff;
+
+            font-size: 27px;
+        }
+
+
+        .logo-text {
+            color: #ffffff;
+        }
+
+        .logo-text span {
+            color: #c5ff00;
+        }
+
+
+        /* NAV LINKS */
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 42px;
+
+            margin-left: auto;
+
+            margin-right: 45px;
+        }
+
+
+        .nav-links a {
+
+            position: relative;
+
+            color:
+                rgba(255,255,255,0.82);
+
+            font-size: 16px;
+
+            transition:
+                color 0.2s ease;
+        }
+
+
+        .nav-links a:hover {
+            color: #c5ff00;
+        }
+
+
+        .nav-links a.active {
+            color: #ffffff;
+        }
+
+
+        .nav-links a.active::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: -13px;
+
+            height: 2px;
+
+            background: #c5ff00;
+
+            box-shadow:
+                0 0 10px
+                rgba(197,255,0,0.7);
+        }
+
+
+        /* ADMIN BUTTON */
+
+        .admin-btn {
+
+            height: 50px;
+
+            padding: 0 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            border: 1px solid #c5ff00;
+
+            border-radius: 12px;
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            transition:
+                0.25s ease;
+        }
+
+
+        .admin-btn:hover {
+
+            background:
+                rgba(197,255,0,0.08);
+
+            box-shadow:
+                0 0 25px
+                rgba(197,255,0,0.12);
+        }
+
+
+        .admin-icon {
+            color: #c5ff00;
+            font-size: 17px;
+        }
+
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+
+            min-height:
+                calc(100vh - 90px);
+
+            position: relative;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                430px;
+
+            grid-template-rows:
+                1fr
+                auto;
+
+            column-gap: 55px;
+
+            padding:
+                75px 4.5% 28px;
+
+            background:
+                #030708;
+        }
+
+
+        /*
+          GARAGE/CAR VISUAL
+        */
+
+.hero::before {
+    content: "";
+    position: absolute;
+
+    z-index: 0;
+
+    top: 70px;
+    right: 18%;
+    width: 620px;
+    height: 620px;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(3,7,8,0.95) 0%,
+            rgba(3,7,8,0.35) 25%,
+            rgba(3,7,8,0.05) 55%,
+            rgba(3,7,8,0.15) 100%
+        ),
+        url("car-scene.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    pointer-events: none;
+}
+        /* DARK OVERLAY */
+
+        .hero::after {
+
+            content: "";
+
+            position: absolute;
+
+            z-index: 1;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.08) 0%,
+                    rgba(0,0,0,0) 55%,
+                    rgba(3,7,8,0.92) 100%
+                );
+        }
+
+
+        /* =========================================
+           HERO CONTENT
+        ========================================= */
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 5;
+
+            grid-column: 1;
+
+            grid-row: 1;
+
+            align-self: center;
+
+            max-width: 650px;
+
+            padding-bottom: 25px;
+        }
+
+
+        .eyebrow {
+
+            margin-bottom: 27px;
+
+            color: #c5ff00;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .hero-title {
+
+            font-size:
+                clamp(58px, 6vw, 91px);
+
+            line-height:
+                0.93;
+
+            letter-spacing:
+                -5px;
+
+            font-weight:
+                900;
+
+            text-transform:
+                none;
+        }
+
+
+        .hero-title .green {
+            color: #c5ff00;
+
+            display: block;
+        }
+
+
+        .hero-description {
+
+            max-width: 570px;
+
+            margin-top: 30px;
+
+            color:
+                rgba(255,255,255,0.72);
+
+            font-size: 18px;
+
+            line-height: 1.65;
+        }
+
+
+        /* =========================================
+           HERO BUTTONS
+        ========================================= */
+
+        .hero-buttons {
+
+            display: flex;
+
+            gap: 22px;
+
+            margin-top: 38px;
+        }
+
+
+        .btn {
+
+            height: 58px;
+
+            padding:
+                0 38px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            transition:
+                0.25s ease;
+        }
+
+
+        .btn-primary {
+
+            background:
+                #c5ff00;
+
+            color:
+                #050900;
+
+            box-shadow:
+                0 10px 35px
+                rgba(197,255,0,0.18);
+        }
+
+
+        .btn-primary:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 14px 40px
+                rgba(197,255,0,0.28);
+        }
+
+
+        .btn-secondary {
+
+            border:
+                1px solid
+                rgba(255,255,255,0.7);
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(0,0,0,0.16);
+        }
+
+
+        .btn-secondary:hover {
+
+            border-color:
+                #c5ff00;
+
+            color:
+                #c5ff00;
+
+            transform:
+                translateY(-3px);
+        }
+
+
+        /* =========================================
+           STATS
+        ========================================= */
+
+        .stats {
+
+            display: flex;
+
+            margin-top: 48px;
+        }
+
+
+        .stat {
+
+            min-width: 165px;
+
+            padding-right: 30px;
+
+            margin-right: 30px;
+
+            border-right:
+                1px solid
+                rgba(255,255,255,0.16);
+        }
+
+
+        .stat:last-child {
+
+            border-right:
+                none;
+
+            margin-right: 0;
+        }
+
+
+        .stat strong {
+
+            display: block;
+
+            color:
+                #c5ff00;
+
+            font-size: 30px;
+
+            font-weight: 900;
+        }
+
+
+        .stat span {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color:
+                rgba(255,255,255,0.72);
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           LOGIN CARD
+        ========================================= */
+
+        .login-card {
+
+            position: relative;
+
+            z-index: 10;
+
+            grid-column: 2;
+
+            grid-row: 1;
+
+            align-self: center;
+
+            width: 100%;
+
+            padding: 35px 32px 30px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            border-radius: 20px;
+
+            background:
+                rgba(7,14,17,0.88);
+
+            box-shadow:
+                0 30px 80px
+                rgba(0,0,0,0.58);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+        }
+
+
+        .login-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: -1px;
+
+            left: 80px;
+            right: 80px;
+
+            height: 2px;
+
+            background:
+                #c5ff00;
+
+            box-shadow:
+                0 0 16px
+                rgba(197,255,0,0.65);
+        }
+
+
+        .login-label {
+
+            color:
+                #c5ff00;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+
+        .login-card h2 {
+
+            margin-top: 15px;
+
+            font-size: 31px;
+
+            line-height: 1.1;
+        }
+
+
+        .login-subtitle {
+
+            margin-top: 10px;
+
+            color:
+                rgba(255,255,255,0.62);
+
+            font-size: 15px;
+        }
+
+
+        .form-group {
+
+            margin-top: 24px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 10px;
+
+            color:
+                rgba(255,255,255,0.85);
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            height: 52px;
+
+            padding:
+                0 16px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background:
+                rgba(17,27,31,0.82);
+
+            color:
+                #ffffff;
+
+            font-size: 14px;
+
+            transition:
+                0.2s ease;
+        }
+
+
+        .form-group input:focus {
+
+            border-color:
+                #c5ff00;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(197,255,0,0.08);
+        }
+
+
+        .form-group input::placeholder {
+
+            color:
+                rgba(255,255,255,0.38);
+        }
+
+
+        /* LOGIN OPTIONS */
+
+        .login-options {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
 
             margin-top: 18px;
         }
 
-        .admin-link a {
-            color: #64748b;
 
-            font-size: 14px;
+        .remember {
 
-            text-decoration: none;
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            color:
+                rgba(255,255,255,0.66);
+
+            font-size: 13px;
         }
 
-        .admin-link a:hover {
-            color: #2563eb;
+
+        .remember input {
+
+            width: 17px;
+            height: 17px;
+
+            accent-color:
+                #c5ff00;
         }
 
-        @media (max-width: 500px) {
+
+        .forgot {
+
+            color:
+                #c5ff00;
+
+            font-size: 12px;
+
+            text-decoration:
+                underline;
+        }
+
+
+        /* LOGIN BUTTON */
+
+        .login-btn {
+
+            width: 100%;
+
+            height: 53px;
+
+            margin-top: 25px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                #c5ff00;
+
+            color:
+                #050900;
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition:
+                0.25s ease;
+        }
+
+
+        .login-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(197,255,0,0.24);
+        }
+
+
+        .register-text {
+
+            margin-top: 19px;
+
+            text-align: center;
+
+            color:
+                rgba(255,255,255,0.48);
+
+            font-size: 12px;
+        }
+
+
+        .register-text a {
+
+            color:
+                #c5ff00;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           SERVICE CARDS
+        ========================================= */
+
+        .features {
+
+            position: relative;
+
+            z-index: 8;
+
+            grid-column:
+                1 / -1;
+
+            grid-row:
+                2;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-top: 18px;
+        }
+
+
+        .feature {
+
+            min-height: 140px;
+
+            padding:
+                22px 24px;
+
+            display: grid;
+
+            grid-template-columns:
+                78px 1fr;
+
+            align-items: center;
+
+            gap: 20px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            border-radius: 15px;
+
+            background:
+                rgba(9,17,20,0.80);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,0,0,0.22);
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            transition:
+                0.25s ease;
+        }
+
+
+        .feature:hover {
+
+            transform:
+                translateY(-4px);
+
+            border-color:
+                rgba(197,255,0,0.32);
+        }
+
+
+        .feature-icon {
+
+            width: 62px;
+            height: 62px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(197,255,0,0.20);
+
+            background:
+                rgba(197,255,0,0.08);
+
+            color:
+                #c5ff00;
+
+            font-size: 28px;
+        }
+
+
+        .feature h3 {
+
+            font-size: 16px;
+
+            line-height: 1.2;
+        }
+
+
+        .feature p {
+
+            margin-top: 12px;
+
+            color:
+                rgba(255,255,255,0.64);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .footer {
+
+            min-height: 85px;
+
+            padding:
+                0 4%;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr 1fr;
+
+            align-items: center;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            background:
+                #030708;
+        }
+
+
+        .footer-logo {
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .footer-logo span {
+
+            color:
+                #c5ff00;
+        }
+
+
+        .footer-center {
+
+            text-align:
+                center;
+
+            color:
+                rgba(255,255,255,0.55);
+
+            font-size: 11px;
+
+            letter-spacing: 4px;
+        }
+
+
+        .footer-links {
+
+            display: flex;
+
+            justify-content:
+                flex-end;
+
+            gap: 28px;
+
+            color:
+                rgba(255,255,255,0.68);
+
+            font-size: 13px;
+        }
+
+
+        .footer-links a:hover {
+
+            color:
+                #c5ff00;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1150px) {
+
+            .hero {
+
+                grid-template-columns:
+                    minmax(0, 1fr)
+                    390px;
+
+                column-gap:
+                    30px;
+            }
+
+            .hero-title {
+
+                font-size:
+                    clamp(52px, 6vw, 76px);
+            }
+
+            .nav-links {
+
+                gap: 25px;
+
+                margin-right: 25px;
+            }
+
+            .feature {
+
+                grid-template-columns:
+                    1fr;
+
+                text-align:
+                    center;
+
+                justify-items:
+                    center;
+
+                gap: 10px;
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .navbar {
+
+                padding:
+                    0 25px;
+            }
+
+            .nav-links {
+
+                display:
+                    none;
+            }
+
+            .hero {
+
+                min-height:
+                    auto;
+
+                grid-template-columns:
+                    1fr;
+
+                grid-template-rows:
+                    auto auto auto;
+
+                padding:
+                    65px 25px 30px;
+
+                row-gap:
+                    35px;
+            }
+
+
+            .hero::before {
+
+                width:
+                    100%;
+
+                opacity:
+                    0.45;
+            }
+
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+.login-card {
+    position: relative;
+    z-index: 10;
+}
+
+            .features {
+
+                grid-column:
+                    1;
+
+                grid-row:
+                    3;
+
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+
+            .footer {
+
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    18px;
+
+                padding:
+                    25px;
+
+                text-align:
+                    center;
+            }
+
+
+            .footer-links {
+
+                justify-content:
+                    center;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                height:
+                    72px;
+            }
+
+
+            .logo {
+
+                font-size:
+                    18px;
+            }
+
+
+            .admin-btn {
+
+                height:
+                    42px;
+
+                padding:
+                    0 15px;
+
+                font-size:
+                    12px;
+            }
+
+
+            .hero {
+
+                padding:
+                    45px 18px 25px;
+            }
+
+
+            .hero-title {
+
+                font-size:
+                    51px;
+
+                letter-spacing:
+                    -3px;
+            }
+
+
+            .hero-description {
+
+                font-size:
+                    15px;
+            }
+
+
+            .hero-buttons {
+
+                flex-direction:
+                    column;
+
+                gap:
+                    12px;
+            }
+
+
+            .btn {
+
+                width:
+                    100%;
+            }
+
+
+            .stats {
+
+                flex-wrap:
+                    wrap;
+
+                gap:
+                    20px;
+            }
+
+
+            .stat {
+
+                min-width:
+                    120px;
+
+                margin:
+                    0;
+
+                padding-right:
+                    15px;
+            }
+
 
             .login-card {
-                padding: 25px 20px;
+
+                padding:
+                    27px 22px;
             }
 
-            .logo h1 {
-                font-size: 26px;
+
+            .features {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .footer-links {
+
+                flex-wrap:
+                    wrap;
+
+                gap:
+                    15px;
             }
         }
 
-    </style>
+      html {
+        scroll-behavior: smooth;
+    }
+
+    .info-section {
+        padding: 90px 8%;
+        background: #05090a;
+        border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-section {
+        background: #080d0f;
+    }
+
+    .info-container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .info-content {
+        max-width: 750px;
+    }
+
+    .section-label {
+        display: inline-block;
+        color: #b7ff00;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 14px;
+    }
+
+    .info-content h2 {
+        margin: 0 0 20px;
+        font-size: 42px;
+        color: #ffffff;
+    }
+
+    .info-content h2 span {
+        color: #b7ff00;
+    }
+
+    .info-content p {
+        color: #aeb7b9;
+        font-size: 16px;
+        line-height: 1.8;
+        margin: 0 0 20px;
+    }
+
+    .contact-details {
+        margin-top: 25px;
+    }
+
+    .contact-details p {
+        margin: 8px 0;
+    }
+
+    .contact-details strong {
+        color: #ffffff;
+    }/* Password eye toggle */
+.password-toggle-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle-wrapper input {
+    width: 100%;
+    padding-right: 60px !important;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #555;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: #9cff00;
+}
+
+.password-toggle svg {
+    width: 24px;
+    height: 24px;
+}  </style>
 
 </head>
 
+
 <body>
 
-<div class="login-container">
 
-    <div class="logo">
+    <!-- =========================================
+         NAVBAR
+    ========================================= -->
 
-        <div class="logo-icon">🚗</div>
+    <header class="navbar">
 
-        <h1>Vehicle Service Portal</h1>
 
-        <p>Manage your vehicle services with ease</p>
+        <a
+            href="login.html"
+            class="logo"
+        >
 
-    </div>
 
-    <div class="login-card">
+            <div class="logo-text">
+                VehicleService<span>Portal</span>
+            </div>
 
-        <h2>Welcome Back</h2>
+        </a>
 
-        <p class="subtitle">
-            Login to your account
-        </p>
 
-        <form action="login" method="post">
+        <nav class="nav-links">
 
-            <label for="email">
-                Email
-            </label>
+            <a
+                href="login.html"
+                class="active"
+            >
+                Home
+            </a>
 
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                required
+            <a href="#services">
+                Services
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <a
+            href="admin-login.html"
+            class="admin-btn"
+        >
+
+            <span class="admin-icon">
+                🛡
+            </span>
+
+            Admin Login
+
+        </a>
+
+
+    </header>
+
+
+
+    <!-- =========================================
+         HERO
+    ========================================= -->
+
+    <main class="hero">
+
+
+        <!-- LEFT -->
+
+        <section class="hero-content">
+
+
+            <div class="eyebrow">
+                KEEP YOUR VEHICLE RUNNING SMOOTH
+            </div>
+
+
+            <h1 class="hero-title">
+
+                Your Vehicle.
+
+                <span class="green">
+                    Our Priority.
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Book services, track your appointments,
+                manage your vehicles and get the best
+                care  all in one place.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="register.html"
+                    class="btn btn-primary"
+                >
+                    Get Started&nbsp; →
+                </a>
+
+
+                <a
+                    href="#services"
+                    class="btn btn-secondary"
+                >
+                    View Services
+                </a>
+
+            </div>
+
+
+            <div class="stats">
+
+
+                <div class="stat">
+
+                    <strong>
+                        100+
+                    </strong>
+
+                    <span>
+                        Happy Customers
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <strong>
+                        10+
+                    </strong>
+
+                    <span>
+                        Service Centers
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <strong>
+                        24/7
+                    </strong>
+
+                    <span>
+                        Support
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             LOGIN
+        ====================================== -->
+
+        <section class="login-card">
+
+
+            <div class="login-label">
+                MEMBER ACCESS
+            </div>
+
+
+            <h2>
+                Welcome Back
+            </h2>
+
+
+            <p class="login-subtitle">
+                Log in to your account
+            </p>
+
+
+            <form
+action="login"                method="post"
             >
 
-            <label for="password">
-                Password
-            </label>
 
-<input
-    type="password"
-    id="password"
-    name="password"
-    placeholder="Enter your password"
-    required
->
+                <div class="form-group">
 
-<div style="text-align: right; margin-top: 8px;">
+                    <label for="email">
+                        Email address
+                    </label>
 
-    <a href="forgot-password.html"
-       style="color: #2563eb;
-              font-size: 14px;
-              text-decoration: none;">
-        Forgot Password?
-    </a>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
 
-</div>
+                </div>
 
-<button type="submit">
-    Login
-</button>
-        </form>
 
-        <div class="register">
 
-            Don't have an account?
+                <div class="form-group">
 
-            <a href="register.html">
-                Register
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="login-options">
+
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            name="remember"
+                        >
+
+                        Remember me
+
+                    </label>
+
+
+                    <a
+                        href="forgot-password.html"
+                        class="forgot"
+                    >
+                        Forgot password?
+                    </a>
+
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login
+                </button>
+
+
+            </form>
+
+
+            <p class="register-text">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create one
+                </a>
+
+            </p>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             SERVICE CARDS
+        ====================================== -->
+
+        <section
+            class="features"
+            id="services"
+        >
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔧
+                </div>
+
+                <div>
+
+                    <h3>
+                        Easy Booking
+                    </h3>
+
+                    <p>
+                        Schedule your service
+                        in just a few clicks.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ▣
+                </div>
+
+                <div>
+
+                    <h3>
+                        Track Service
+                    </h3>
+
+                    <p>
+                        Stay updated with
+                        real-time booking status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🚗
+                </div>
+
+                <div>
+
+                    <h3>
+                        Manage Vehicles
+                    </h3>
+
+                    <p>
+                        Add and manage all your
+                        vehicles in one place.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🛡
+                </div>
+
+                <div>
+
+                    <h3>
+                        Trusted Service
+                    </h3>
+
+                    <p>
+                        Connect with verified
+                        service centers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="info-section">
+        <div class="info-container">
+            <div class="info-content">
+                <span class="section-label">ABOUT US</span>
+                <h2>VehicleService<span>Portal</span></h2>
+                <p>
+                    VehicleServicePortal makes vehicle servicing simple and convenient.
+                    Book your service, manage your vehicles, track your appointments
+                    and keep your vehicle running smoothly from one place.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="info-section contact-section">
+        <div class="info-container">
+            <div class="info-content">
+                <span class="section-label">CONTACT US</span>
+                <h2>We're Here To Help</h2>
+                <p>
+                    Have a question about your vehicle service or booking?
+                    Get in touch with our support team.
+                </p>
+
+                <div class="contact-details">
+                    <p><strong>Email:</strong> support@vehicleserviceportal.com</p>
+                    <p><strong>Phone:</strong> +91 98765 43210</p>
+                    <p><strong>Hours:</strong> Monday - Saturday, 9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+
+
+        <div class="footer-logo">
+
+            VehicleService<span>Portal</span>
+
+        </div>
+
+
+        <div class="footer-center">
+
+            SERVING YOUR VEHICLE
+            &nbsp;•&nbsp;
+            SUPPORTING YOUR JOURNEY
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="login.html">
+                Home
+            </a>
+
+            <a href="#services">
+                Services
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#contact">
+                Contact
             </a>
 
         </div>
 
-        <div class="admin-link">
 
-            <a href="admin-login.html">
-                Administrator Login
-            </a>
+    </footer>
 
-        </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const passwordInput = document.querySelector('input[type="password"]');
 
-    </div>
+    if (!passwordInput) return;
 
-</div>
+    const wrapper = document.createElement("div");
+    wrapper.className = "password-toggle-wrapper";
 
+    passwordInput.parentNode.insertBefore(wrapper, passwordInput);
+    wrapper.appendChild(passwordInput);
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "password-toggle";
+    toggle.setAttribute("aria-label", "Show password");
+
+    toggle.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/>
+            <circle cx="12" cy="12" r="3"/>
+        </svg>
+    `;
+
+    wrapper.appendChild(toggle);
+
+    toggle.addEventListener("click", function () {
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggle.setAttribute("aria-label", "Hide password");
+
+            toggle.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3l18 18"/>
+                    <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
+                    <path d="M9.9 4.2A10.8 10.8 0 0 1 12 4c6.5 0 10 8 10 8a17.2 17.2 0 0 1-3.1 4.5"/>
+                    <path d="M6.1 6.1C3.5 8.1 2 12 2 12s3.5 8 10 8c1.5 0 2.8-.3 4-.8"/>
+                </svg>
+            `;
+        } else {
+            passwordInput.type = "password";
+            toggle.setAttribute("aria-label", "Show password");
+
+            toggle.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+            `;
+        }
+    });
+});
+</script>
 </body>
 
 </html>
+
