@@ -36,6 +36,31 @@ public class AdminDashboardServlet extends HttpServlet {
 
         StringBuilder html = new StringBuilder();
 
+        // AUTOLUX LIVE DATABASE STATS
+        int totalBookings = 0, pendingBookings = 0, confirmedBookings = 0;
+        int completedBookings = 0, totalUsers = 0;
+        try (Connection statsConnection = DBConnection.getConnection();
+             PreparedStatement stats = statsConnection.prepareStatement(
+                "SELECT " +
+                "(SELECT COUNT(*) FROM bookings), " +
+                "(SELECT COUNT(*) FROM bookings WHERE status='Pending'), " +
+                "(SELECT COUNT(*) FROM bookings WHERE status IN ('Confirmed','Approved','In Progress')), " +
+                "(SELECT COUNT(*) FROM bookings WHERE status='Completed'), " +
+                "(SELECT COUNT(*) FROM users WHERE role='USER')")) {
+            try (ResultSet rs = stats.executeQuery()) {
+                if (rs.next()) {
+                    totalBookings = rs.getInt(1);
+                    pendingBookings = rs.getInt(2);
+                    confirmedBookings = rs.getInt(3);
+                    completedBookings = rs.getInt(4);
+                    totalUsers = rs.getInt(5);
+                }
+            }
+        } catch (Exception statsError) {
+            getServletContext().log("Could not load admin summary statistics", statsError);
+        }
+
+
         html.append("""
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +72,7 @@ public class AdminDashboardServlet extends HttpServlet {
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Admin Dashboard - Vehicle Service Portal</title>
+<title>Admin Dashboard - AUTOLUX</title>
 
 <style>
 
@@ -228,11 +253,20 @@ button:hover {
 
 <body>
 
+<div class="section" id="autolux-admin-summary">
+<h2>AUTOLUX LIVE DATABASE STATS</h2>
+<div style="display:flex;flex-wrap:wrap;gap:14px">
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">TOTAL BOOKINGS<br><strong>" + totalBookings + "</strong></div>
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">PENDING<br><strong>" + pendingBookings + "</strong></div>
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">CONFIRMED / IN PROGRESS<br><strong>" + confirmedBookings + "</strong></div>
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">COMPLETED<br><strong>" + completedBookings + "</strong></div>
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">REGISTERED USERS<br><strong>" + totalUsers + "</strong></div>
+</div></div>
 <div class="dashboard">
 
 <div class="header">
 
-<h1>🚗 Vehicle Service Portal</h1>
+<h1>🚗 AUTOLUX</h1>
 
 <p>Administrator Dashboard</p>
 
@@ -575,7 +609,7 @@ Logout
 </a>
 
 <div class="footer">
-Vehicle Service Portal • Admin Panel
+AUTOLUX • Admin Panel
 </div>
 
 </div>

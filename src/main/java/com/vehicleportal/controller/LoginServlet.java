@@ -72,7 +72,7 @@ if (!result.next()) {
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Login Failed - Vehicle Service Portal</title>
+<title>Login Failed - AUTOLUX</title>
 
 <style>
 
@@ -307,7 +307,7 @@ h1 {
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Vehicle Service Portal</title>
+<title>AUTOLUX</title>
 
 <style>
 
@@ -319,154 +319,144 @@ body {
     margin: 0;
     padding: 35px 20px;
     font-family: Arial, Helvetica, sans-serif;
-    background: #eef4ff;
-    color: #1e293b;
+    background: #080a08;
+    color: #f5f5f5;
 }
-
 .dashboard {
-    max-width: 850px;
+    max-width: 1100px;
     margin: 0 auto;
 }
-
 .header {
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: white;
+    background: #111411;
+    color: #f5f5f5;
     padding: 40px;
+    border: 1px solid #30372a;
     border-radius: 18px;
     margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.20);
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
 }
-
 .header h1 {
     margin: 0 0 8px;
     font-size: 40px;
+    color: #c6ff00;
 }
-
 .header h2 {
     margin: 0;
     font-size: 22px;
     font-weight: normal;
+    color: #f5f5f5;
 }
-
 .welcome {
-    background: white;
+    background: #111411;
+    color: #f5f5f5;
     padding: 30px;
+    border: 1px solid #30372a;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(30, 58, 138, 0.09);
+    box-shadow: 0 5px 20px rgba(0,0,0,.25);
     margin-bottom: 25px;
 }
-
 .welcome h2 {
     margin-top: 0;
-    color: #1e3a8a;
+    color: #c6ff00;
 }
-
 .welcome p {
-    color: #475569;
+    color: #b8bdb4;
     font-size: 17px;
     line-height: 1.6;
 }
-
 .actions {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
 }
-
 .action-card {
-    background: white;
+    background: #111411;
+    color: #f5f5f5;
     padding: 30px;
+    border: 1px solid #30372a;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(30, 58, 138, 0.09);
+    box-shadow: 0 5px 20px rgba(0,0,0,.25);
     text-align: center;
+    transition: border-color .2s, transform .2s;
 }
-
+.action-card:hover {
+    border-color: #c6ff00;
+    transform: translateY(-3px);
+}
 .action-card:last-child {
     grid-column: 1 / 3;
     width: 50%;
     justify-self: center;
 }
-
 .icon {
     font-size: 45px;
     margin-bottom: 12px;
 }
-
 .action-card h3 {
-    color: #1e3a8a;
+    color: #c6ff00;
     margin: 10px 0;
 }
-
 .action-card p {
-    color: #64748b;
+    color: #b8bdb4;
     min-height: 45px;
 }
-
 .action-button {
     display: block;
     padding: 14px 18px;
     margin-top: 20px;
-    background: #2563eb;
-    color: white;
+    background: #c6ff00;
+    color: #080a08;
+    border: 1px solid #c6ff00;
     border-radius: 9px;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.2s;
+    transition: .2s;
 }
-
 .action-button:hover {
-    background: #1d4ed8;
+    background: #dcff70;
+    color: #080a08;
     transform: translateY(-2px);
 }
-
 .logout {
     display: block;
     width: 180px;
     margin: 30px auto 0;
     padding: 13px 20px;
-    background: #dc2626;
-    color: white;
+    background: #252a22;
+    color: #c6ff00;
+    border: 1px solid #424a3a;
     text-align: center;
     border-radius: 9px;
     text-decoration: none;
     font-weight: bold;
 }
-
 .logout:hover {
-    background: #b91c1c;
+    background: #30382a;
 }
-
 .footer {
     text-align: center;
     margin-top: 25px;
-    color: #64748b;
+    color: #9ca394;
     font-size: 14px;
 }
-
 @media (max-width: 650px) {
-
     body {
         padding: 20px 10px;
     }
-
     .header {
         padding: 28px 22px;
     }
-
     .header h1 {
         font-size: 30px;
     }
-
     .actions {
         grid-template-columns: 1fr;
     }
-
     .action-card:last-child {
         grid-column: auto;
         width: 100%;
     }
 }
-
 </style>
 
 </head>
@@ -477,7 +467,7 @@ body {
 
 <div class="header">
 
-<h1>🚗 Vehicle Service Portal</h1>
+<h1>🚗 AUTOLUX</h1>
 
 <h2>Dashboard</h2>
 
@@ -556,11 +546,23 @@ Logout
 </a>
 
 <div class="footer">
-Vehicle Service Portal
+AUTOLUX
 </div>
 
 </div>
 
+
+<!-- AUTOLUX FEATURE CENTER -->
+<section style="max-width:1100px;margin:28px auto;padding:24px;background:#1c1e19;color:#f4f4f0;border:1px solid #34372e;border-radius:16px;font-family:Arial,sans-serif">
+<h2 style="color:#c6ff00;margin-top:0">AUTOLUX FEATURE CENTER</h2>
+<p>Manage your vehicles, track service progress and estimate service costs.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<a style="display:inline-block;padding:12px 16px;background:#c6ff00;color:#151710;border-radius:8px;text-decoration:none;font-weight:bold" href="features/dashboard">Live Dashboard</a>
+<a style="display:inline-block;padding:12px 16px;background:#c6ff00;color:#151710;border-radius:8px;text-decoration:none;font-weight:bold" href="features/bookings">My Bookings & Tracker</a>
+<a style="display:inline-block;padding:12px 16px;background:#c6ff00;color:#151710;border-radius:8px;text-decoration:none;font-weight:bold" href="features/garage">My Garage</a>
+<a style="display:inline-block;padding:12px 16px;background:#c6ff00;color:#151710;border-radius:8px;text-decoration:none;font-weight:bold" href="book-service-page">Book a Service</a>
+</div>
+</section>
 </body>
 
 </html>

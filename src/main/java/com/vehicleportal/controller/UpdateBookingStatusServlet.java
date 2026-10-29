@@ -35,6 +35,8 @@ public class UpdateBookingStatusServlet extends HttpServlet {
 
         if (!"Pending".equals(status) &&
             !"Approved".equals(status) &&
+            !"Confirmed".equals(status) &&
+            !"In Progress".equals(status) &&
             !"Completed".equals(status) &&
             !"Cancelled".equals(status)) {
 

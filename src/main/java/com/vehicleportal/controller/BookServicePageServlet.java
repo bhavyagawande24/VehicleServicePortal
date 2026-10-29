@@ -94,7 +94,7 @@ public class BookServicePageServlet extends HttpServlet {
             + "<meta charset='UTF-8'>"
             + "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
             + "<title>Book Vehicle Service</title>"
-            + "<link rel='stylesheet' href='css/style.css'>"
+            + "<link rel='stylesheet' href='css/autolux-booking.css'>"
             + "</head>"
 
             + "<body>"
@@ -103,7 +103,7 @@ public class BookServicePageServlet extends HttpServlet {
 
             + "<div class='form-box'>"
 
-            + "<h1>Vehicle Service Portal</h1>"
+            + "<h1>AUTOLUX</h1>"
             + "<h2>Book a Service</h2>"
 
             + "<form action='book-service' method='post'>"
@@ -132,9 +132,23 @@ public class BookServicePageServlet extends HttpServlet {
 
             + "</select>"
 
+            + "<div style='margin:18px 0;padding:16px;background:#1c1e19;color:#f4f4f0;border:1px solid #c6ff00;border-radius:10px'>"
+            + "<strong style='color:#c6ff00'>Estimated Service Cost</strong>"
+            + "<h2 id='estimatedCost' style='margin:10px 0;color:#c6ff00'>Select a service</h2>"
+            + "<small>Indicative estimate only. Final charges may vary after inspection.</small>"
+            + "</div>"
+            + "<script>"
+            + "const servicePrices={'Oil Change':1499,'General Service':2499,'Brake Service':1999,'Engine Service':4999,'AC Service':1799,'Full Service':3999};"
+            + "const serviceSelect=document.querySelector('select[name=serviceType]');"
+            + "serviceSelect.addEventListener('change',function(){"
+            + "const price=servicePrices[this.value];"
+            + "document.getElementById('estimatedCost').textContent=price?'₹'+price.toLocaleString('en-IN'):'Select a service';"
+            + "});"
+            + "</script>"
+
             + "<label>Booking Date</label>"
 
-            + "<input type='date' name='bookingDate' required>"
+            + "<input type='date' name='bookingDate' min='" + java.time.LocalDate.now() + "' required>"
 
             + "<button type='submit'>Book Service</button>"
 

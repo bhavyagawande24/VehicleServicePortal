@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Vehicle Service Portal - Dashboard</title>
+    <title>AUTOLUX - Dashboard</title>
 
     <style>
 
@@ -474,7 +474,147 @@
             }
         }
 
-    </style>
+    
+/* AUTOLUX dark theme */
+body { background: #080a08 !important; color: #f5f5f5 !important; }
+.navbar { background: #111411 !important; border-color: #292e25 !important; }
+.brand { color: #c6ff00 !important; }
+.brand-icon { background: #202719 !important; color: #c6ff00 !important; }
+.nav-link { color: #d0d0d0 !important; }
+.nav-link:hover { color: #c6ff00 !important; }
+.nav-logout { color: #ff7777 !important; }
+.section-heading, .section-heading h2, .page h1, .page h2 { color: #f5f5f5 !important; }
+.options .option {
+    background: #111411 !important;
+    border: 1px solid #30372a !important;
+    color: #f5f5f5 !important;
+    border-radius: 14px !important;
+}
+.options .option:hover {
+    border-color: #c6ff00 !important;
+    transform: translateY(-3px);
+}
+.option-icon { background: #202719 !important; color: #c6ff00 !important; }
+.option-title, .option-description { color: #f5f5f5 !important; }
+.option-arrow { color: #c6ff00 !important; }
+.footer { color: #b8b8b8 !important; border-color: #292e25 !important; }
+.footer span:first-child { color: #c6ff00 !important; }
+
+
+/* AUTOLUX COMPLETE DARK THEME */
+body {
+    background: #080a08 !important;
+    color: #f5f5f5 !important;
+}
+
+/* Header and navigation */
+.navbar, header, .hero, .dashboard-header {
+    background: #111411 !important;
+    color: #f5f5f5 !important;
+    border-color: #30372a !important;
+    box-shadow: none !important;
+}
+.brand, .logo, .brand-name {
+    color: #c6ff00 !important;
+}
+.brand-icon, .logo-icon {
+    background: #202719 !important;
+    color: #c6ff00 !important;
+}
+.nav-link {
+    color: #e0e0e0 !important;
+}
+.nav-link:hover {
+    color: #c6ff00 !important;
+}
+
+/* Main content and welcome panel */
+.page, main, .welcome, .welcome-box, .intro, .welcome-card {
+    color: #f5f5f5 !important;
+}
+.page h1, .page h2, .page h3,
+.welcome h1, .welcome h2, .welcome h3,
+.section-heading, .section-heading h2 {
+    color: #f5f5f5 !important;
+}
+.page p, .welcome p, .welcome-box p, .intro p {
+    color: #b8bdb4 !important;
+}
+
+/* All dashboard cards */
+.options .option, .option, .card, .welcome-card,
+.welcome-box, .intro {
+    background: #111411 !important;
+    color: #f5f5f5 !important;
+    border: 1px solid #30372a !important;
+    border-radius: 18px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.25) !important;
+}
+.options .option:hover, .option:hover, .card:hover {
+    border-color: #c6ff00 !important;
+    box-shadow: 0 8px 28px rgba(198,255,0,.08) !important;
+}
+.option-icon, .card-icon {
+    background: #202719 !important;
+    color: #c6ff00 !important;
+}
+.option-title, .card-title {
+    color: #c6ff00 !important;
+}
+.option-description, .card p {
+    color: #b8bdb4 !important;
+}
+.option-arrow {
+    color: #c6ff00 !important;
+}
+
+/* Buttons and card action links */
+button, .btn, .option button, .option-button,
+.option-cta, .option-link, a.button {
+    background: #c6ff00 !important;
+    color: #080a08 !important;
+    border: 1px solid #c6ff00 !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+button:hover, .btn:hover, .option-button:hover,
+.option-cta:hover, .option-link:hover, a.button:hover {
+    background: #dcff70 !important;
+    color: #080a08 !important;
+}
+
+/* Keep card links readable even if they aren't buttons */
+.options .option, a.option {
+    text-decoration: none !important;
+}
+a:not(.option):not(.button) {
+    transition: color .2s ease;
+}
+.nav-logout {
+    color: #ff9999 !important;
+}
+
+/* Footer */
+.footer {
+    color: #b8bdb4 !important;
+    border-color: #30372a !important;
+}
+.footer span:first-child {
+    color: #c6ff00 !important;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+    .page {
+        width: 92% !important;
+    }
+    .options {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+</style>
 
 </head>
 
@@ -490,7 +630,7 @@
                 🚗
             </span>
 
-            Vehicle Service Portal
+            AUTOLUX
 
         </a>
 
@@ -684,7 +824,7 @@
         <footer class="footer">
 
             <span>
-                Vehicle Service Portal
+                AUTOLUX
             </span>
 
             <span>
@@ -695,6 +835,16 @@
 
     </main>
 
-</body>
+
+<!-- AUTOLUX FEATURE LINKS -->
+<section style="max-width:1100px;margin:25px auto;padding:22px;background:#1c1e19;color:#f4f4f0;border:1px solid #34372e;border-radius:14px;font-family:Arial,sans-serif">
+  <h2 style="color:#c6ff00">AUTOLUX Services</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:12px">
+    <a style="padding:12px 16px;background:#c6ff00;color:#151710;border-radius:8px;text-decoration:none;font-weight:bold" href="features/dashboard">Live Dashboard</a>
+    <a style="padding:12px 16px;background:#c6ff00;color:#151710;border-radius:8px;text-decoration:none;font-weight:bold" href="features/bookings">My Bookings</a>
+    <a style="padding:12px 16px;background:#c6ff00;color:#151710;border-radius:8px;text-decoration:none;font-weight:bold" href="features/garage">My Garage</a>
+  </div>
+</section>
+\n</body>
 
 </html>

@@ -7,3 +7,10 @@ target/
 login-backup.html
 login.htmlø
 target.png
+src/main/java_backup_features/
+src/main/webapp_backup_features/
+src_backup_before_autolux/
+login_broken_backup.html
+vehicle_service_portal_backup_features.sql
+vehicle_service_portal.sql
+.env

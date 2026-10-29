@@ -22,7 +22,7 @@ import java.util.Base64;
 public class ForgotPasswordServlet extends HttpServlet {
 
     private static final String RESET_BASE_URL =
-            "http://localhost:8080/VehicleServicePortal/reset-password.html?token=";
+            "http://localhost:8080/AUTOLUX/reset-password.html?token=";
 
     @Override
     protected void doPost(HttpServletRequest request,

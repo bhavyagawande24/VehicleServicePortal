@@ -46,7 +46,7 @@ public class MyBookingsServlet extends HttpServlet {
                 <meta name="viewport"
                       content="width=device-width, initial-scale=1.0">
 
-                <title>My Bookings - Vehicle Service Portal</title>
+                <title>My Bookings - AUTOLUX</title>
 
                 <style>
                     body {
@@ -103,7 +103,25 @@ public class MyBookingsServlet extends HttpServlet {
                         text-decoration: none;
                         font-weight: bold;
                     }
-                </style>
+                
+/* AUTOLUX dark theme */
+body { background: #080a08 !important; color: #f5f5f5 !important; }
+.container { color: #f5f5f5 !important; }
+.box {
+    background: #111411 !important;
+    color: #f5f5f5 !important;
+    border: 1px solid #30372a !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.35) !important;
+}
+h1, h2 { color: #c6ff00 !important; }
+table { color: #f5f5f5 !important; }
+th { background: #c6ff00 !important; color: #080a08 !important; border-color: #30372a !important; }
+td { background: #111411 !important; color: #f5f5f5 !important; border-color: #30372a !important; }
+tr:nth-child(even) td { background: #191d17 !important; }
+.back { color: #c6ff00 !important; }
+.back:hover { color: #e0ff70 !important; }
+
+</style>
 
             </head>
 
@@ -113,7 +131,7 @@ public class MyBookingsServlet extends HttpServlet {
 
             <div class="box">
 
-                <h1>Vehicle Service Portal</h1>
+                <h1>AUTOLUX</h1>
 
                 <h2>My Service Bookings</h2>
 
