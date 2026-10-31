@@ -17,152 +17,199 @@ import java.sql.ResultSet;
 @WebServlet("/book-service-page")
 public class BookServicePageServlet extends HttpServlet {
 
+    private String escapeHtml(String value) {
+        if (value == null) return "";
+        return value.replace("&", "&amp;")
+                    .replace("<", "&lt;")
+                    .replace(">", "&gt;")
+                    .replace("\"", "&quot;")
+                    .replace("'", "&#39;");
+    }
+
     @Override
     protected void doGet(HttpServletRequest request,
-                          HttpServletResponse response)
+                         HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-
-        if (session == null ||
-            session.getAttribute("userId") == null) {
-
-            response.sendRedirect("login.html");
+        if (session == null || session.getAttribute("userId") == null) {
+            response.sendRedirect(request.getContextPath() + "/login.html");
             return;
         }
 
-        int userId =
-                (Integer) session.getAttribute("userId");
+        int userId = (Integer) session.getAttribute("userId");
+        String context = request.getContextPath();
 
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
         StringBuilder vehicleOptions = new StringBuilder();
+        boolean hasVehicles = false;
 
-        String sql =
-                "SELECT vehicle_id, vehicle_number, vehicle_type, model " +
-                "FROM vehicles WHERE user_id = ?";
+        String sql = "SELECT vehicle_id, vehicle_number, vehicle_type, model " +
+                     "FROM vehicles WHERE user_id = ?";
 
-        try (Connection connection =
-                     DBConnection.getConnection();
-
-             PreparedStatement statement =
-                     connection.prepareStatement(sql)) {
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, userId);
 
-            ResultSet result = statement.executeQuery();
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    hasVehicles = true;
+                    int vehicleId = result.getInt("vehicle_id");
 
-            while (result.next()) {
-
-                int vehicleId =
-                        result.getInt("vehicle_id");
-
-                String vehicleNumber =
-                        result.getString("vehicle_number");
-
-                String vehicleType =
-                        result.getString("vehicle_type");
-
-                String model =
-                        result.getString("model");
-
-                vehicleOptions.append(
-                    "<option value='" + vehicleId + "'>"
-                    + vehicleNumber + " - "
-                    + vehicleType + " - "
-                    + model
-                    + "</option>"
-                );
+                    vehicleOptions.append("<option value=\"")
+                        .append(vehicleId)
+                        .append("\">")
+                        .append(escapeHtml(result.getString("vehicle_number")))
+                        .append(" - ")
+                        .append(escapeHtml(result.getString("vehicle_type")))
+                        .append(" - ")
+                        .append(escapeHtml(result.getString("model")))
+                        .append("</option>");
+                }
             }
 
         } catch (Exception e) {
-
-            e.printStackTrace();
-
-            response.getWriter().println(
-                    "<h2>Unable to load vehicles.</h2>"
-            );
-
+            getServletContext().log("Unable to load customer vehicles.", e);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                               "Unable to load your vehicles. Please try again later.");
             return;
         }
 
-        response.getWriter().println(
-            "<!DOCTYPE html>"
-            + "<html>"
-            + "<head>"
-            + "<meta charset='UTF-8'>"
-            + "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
-            + "<title>Book Vehicle Service</title>"
-            + "<link rel='stylesheet' href='css/autolux-booking.css'>"
-            + "</head>"
+        StringBuilder html = new StringBuilder();
+        html.append("""
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Book a Service | AUTOLUX</title>
+                <link rel="stylesheet" href="%s/css/autolux-customer-pages.css">
+            </head>
+            <body class="autolux-page">
+            <div class="ap-layout">
+                <aside class="ap-sidebar">
+                    <a href="%s/dashboard.html" class="ap-brand">
+                        <span class="ap-brand-icon">A</span>
+                        <span class="ap-brand-name">AUTO<span>LUX</span></span>
+                    </a>
+                    <div class="ap-nav-label">CUSTOMER MENU</div>
+                    <nav class="ap-nav">
+                        <a href="%s/dashboard.html"><span class="ap-nav-icon">⌂</span>Dashboard</a>
+                        <a href="%s/my-bookings"><span class="ap-nav-icon">▤</span>My Bookings</a>
+                        <a href="%s/book-service-page" class="active"><span class="ap-nav-icon">＋</span>Book a Service</a>
+                        <a href="%s/add-vehicle.html"><span class="ap-nav-icon">▣</span>Add Your Vehicle</a>
+                        <a href="%s/features/garage"><span class="ap-nav-icon">◇</span>My Garage</a>
+                        <a href="%s/logout" class="logout"><span class="ap-nav-icon">↗</span>Logout</a>
+                    </nav>
+                    <div class="ap-sidebar-bottom">
+                        <div class="ap-sidebar-note">
+                            <strong>CARE THAT KEEPS YOU MOVING.</strong>
+                            <p>Choose your vehicle and service, then select a date that works for you.</p>
+                        </div>
+                    </div>
+                </aside>
 
-            + "<body>"
+                <main class="ap-main">
+                    <div class="ap-topbar">
+                        <div class="ap-breadcrumb">Customer Portal <span>/ Book a Service</span></div>
+                        <div class="ap-status"><span class="ap-dot"></span> CUSTOMER AREA</div>
+                    </div>
+                    <header class="ap-heading">
+                        <div class="ap-eyebrow">MAINTENANCE · 03</div>
+                        <h1>Book a Service</h1>
+                        <p>Choose your vehicle, select the service you need, and pick your preferred date.</p>
+                    </header>
 
-            + "<div class='container'>"
+                    <section class="ap-card">
+            """.formatted(context, context, context, context, context, context, context, context));
 
-            + "<div class='form-box'>"
+        if (!hasVehicles) {
+            html.append("""
+                <div class="ap-no-vehicles">
+                    You haven't added a vehicle yet. Add your vehicle first to continue with a service booking.
+                    <a class="ap-back" href="%s/add-vehicle.html"> Add a Vehicle →</a>
+                </div>
+                """.formatted(context));
+        }
 
-            + "<h1>AUTOLUX</h1>"
-            + "<h2>Book a Service</h2>"
+        html.append("""
+                        <form action="%s/book-service" method="post">
+                            <div class="ap-form-grid">
+                                <div class="ap-field full">
+                                    <label for="vehicleId">Select Vehicle</label>
+                                    <select id="vehicleId" name="vehicleId" required>
+                                        <option value="">Select Your Vehicle</option>
+                                        %s
+                                    </select>
+                                </div>
 
-            + "<form action='book-service' method='post'>"
+                                <div class="ap-field full">
+                                    <label for="serviceType">Service Type</label>
+                                    <select id="serviceType" name="serviceType" required>
+                                        <option value="">Select Service</option>
+                                        <option value="Oil Change">Oil Change</option>
+                                        <option value="General Service">General Service</option>
+                                        <option value="Brake Service">Brake Service</option>
+                                        <option value="Engine Service">Engine Service</option>
+                                        <option value="AC Service">AC Service</option>
+                                        <option value="Full Service">Full Service</option>
+                                    </select>
+                                </div>
+                            </div>
 
-            + "<label>Select Vehicle</label>"
+                            <div class="ap-cost">
+                                <div class="ap-cost-label">Estimated Service Cost</div>
+                                <div class="ap-cost-value" id="estimatedCost">Select a service</div>
+                                <small>Indicative estimate only. Final charges may vary after inspection.</small>
+                            </div>
 
-            + "<select name='vehicleId' required>"
+                            <div class="ap-field">
+                                <label for="bookingDate">Booking Date</label>
+                                <input id="bookingDate" type="date" name="bookingDate" min="%s" required>
+                            </div>
 
-            + "<option value=''>Select Your Vehicle</option>"
+                            <div class="ap-form-actions">
+                                <button class="ap-primary" type="submit" %s>Book Service <span>→</span></button>
+                                <a class="ap-back" href="%s/dashboard.html">← Back to Dashboard</a>
+                            </div>
+                        </form>
+                    </section>
+                </main>
+            </div>
 
-            + vehicleOptions.toString()
+            <script>
+                const servicePrices = {
+                    'Oil Change': 1499,
+                    'General Service': 2499,
+                    'Brake Service': 1999,
+                    'Engine Service': 4999,
+                    'AC Service': 1799,
+                    'Full Service': 3999
+                };
 
-            + "</select>"
+                const serviceSelect = document.getElementById('serviceType');
+                const estimatedCost = document.getElementById('estimatedCost');
 
-            + "<label>Service Type</label>"
+                serviceSelect.addEventListener('change', function () {
+                    const price = servicePrices[this.value];
+                    estimatedCost.textContent = price
+                        ? '₹' + price.toLocaleString('en-IN')
+                        : 'Select a service';
+                });
+            </script>
+            </body>
+            </html>
+            """.formatted(
+                context,
+                vehicleOptions.toString(),
+                java.time.LocalDate.now(),
+                hasVehicles ? "" : "disabled",
+                context
+            ));
 
-            + "<select name='serviceType' required>"
-
-            + "<option value=''>Select Service</option>"
-            + "<option value='Oil Change'>Oil Change</option>"
-            + "<option value='General Service'>General Service</option>"
-            + "<option value='Brake Service'>Brake Service</option>"
-            + "<option value='Engine Service'>Engine Service</option>"
-            + "<option value='AC Service'>AC Service</option>"
-            + "<option value='Full Service'>Full Service</option>"
-
-            + "</select>"
-
-            + "<div style='margin:18px 0;padding:16px;background:#1c1e19;color:#f4f4f0;border:1px solid #c6ff00;border-radius:10px'>"
-            + "<strong style='color:#c6ff00'>Estimated Service Cost</strong>"
-            + "<h2 id='estimatedCost' style='margin:10px 0;color:#c6ff00'>Select a service</h2>"
-            + "<small>Indicative estimate only. Final charges may vary after inspection.</small>"
-            + "</div>"
-            + "<script>"
-            + "const servicePrices={'Oil Change':1499,'General Service':2499,'Brake Service':1999,'Engine Service':4999,'AC Service':1799,'Full Service':3999};"
-            + "const serviceSelect=document.querySelector('select[name=serviceType]');"
-            + "serviceSelect.addEventListener('change',function(){"
-            + "const price=servicePrices[this.value];"
-            + "document.getElementById('estimatedCost').textContent=price?'₹'+price.toLocaleString('en-IN'):'Select a service';"
-            + "});"
-            + "</script>"
-
-            + "<label>Booking Date</label>"
-
-            + "<input type='date' name='bookingDate' min='" + java.time.LocalDate.now() + "' required>"
-
-            + "<button type='submit'>Book Service</button>"
-
-            + "</form>"
-
-            + "<p>"
-            + "<a href='dashboard.html'>Back to Dashboard</a>"
-            + "</p>"
-
-            + "</div>"
-            + "</div>"
-
-            + "</body>"
-            + "</html>"
-        );
+        response.getWriter().write(html.toString());
     }
 }

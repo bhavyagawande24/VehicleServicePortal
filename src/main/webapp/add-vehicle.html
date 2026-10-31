@@ -1,155 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Add Vehicle - AUTOLUX</title>
-
-    <link rel="stylesheet" href="css/autolux-booking.css">
-
-<style>/* AUTOLUX Add Vehicle Theme */
-body {
-    background: #080a08 !important;
-    color: #f5f5f5 !important;
-}
-.container {
-    max-width: 900px !important;
-    margin: 55px auto !important;
-}
-.form-box {
-    background: #111411 !important;
-    color: #f5f5f5 !important;
-    border: 1px solid #30372a;
-    border-radius: 20px !important;
-    padding: 40px !important;
-    box-shadow: 0 12px 35px rgba(0,0,0,.35);
-}
-h1 {
-    color: #c6ff00 !important;
-    text-align: center;
-    font-size: 42px;
-    margin-bottom: 25px;
-}
-h2 {
-    color: #f5f5f5 !important;
-    margin-bottom: 28px;
-}
-label {
-    display: block;
-    color: #dedede !important;
-    margin: 18px 0 9px;
-    font-weight: 600;
-}
-input, select {
-    width: 100%;
-    box-sizing: border-box;
-    background: #1a1e18 !important;
-    color: #fff !important;
-    border: 1px solid #424a3a !important;
-    border-radius: 10px !important;
-    padding: 14px !important;
-    font-size: 16px;
-}
-input::placeholder {
-    color: #999 !important;
-}
-input:focus, select:focus {
-    outline: none;
-    border-color: #c6ff00 !important;
-    box-shadow: 0 0 0 2px rgba(198,255,0,.13);
-}
-button {
-    width: 100%;
-    margin-top: 28px;
-    padding: 15px !important;
-    background: #c6ff00 !important;
-    color: #080a08 !important;
-    border: none !important;
-    border-radius: 10px !important;
-    font-size: 17px;
-    font-weight: 800;
-    cursor: pointer;
-}
-button:hover {
-    background: #dcff70 !important;
-}
-.form-box p {
-    margin-top: 24px;
-}
-.form-box a {
-    color: #c6ff00 !important;
-    text-decoration: none;
-    font-weight: 700;
-}
-.form-box a:hover {
-    text-decoration: underline;
-}
-@media (max-width: 600px) {
-    .container { width: 92%; margin: 25px auto !important; }
-    .form-box { padding: 24px !important; }
-}
-</style>
-
+    <title>Add Your Vehicle | AUTOLUX</title>
+    <link rel="stylesheet" href="css/autolux-customer-pages.css">
 </head>
+<body class="autolux-page">
+<div class="ap-layout">
+    <aside class="ap-sidebar">
+        <a href="dashboard.html" class="ap-brand">
+            <span class="ap-brand-icon">A</span>
+            <span class="ap-brand-name">AUTO<span>LUX</span></span>
+        </a>
+        <div class="ap-nav-label">CUSTOMER MENU</div>
+        <nav class="ap-nav">
+            <a href="dashboard.html"><span class="ap-nav-icon">⌂</span>Dashboard</a>
+            <a href="my-bookings"><span class="ap-nav-icon">▤</span>My Bookings</a>
+            <a href="book-service-page"><span class="ap-nav-icon">＋</span>Book a Service</a>
+            <a href="add-vehicle.html" class="active"><span class="ap-nav-icon">▣</span>Add Your Vehicle</a>
+            <a href="features/garage"><span class="ap-nav-icon">◇</span>My Garage</a>
+            <a href="logout" class="logout"><span class="ap-nav-icon">↗</span>Logout</a>
+        </nav>
+        <div class="ap-sidebar-bottom">
+            <div class="ap-sidebar-note">
+                <strong>YOUR VEHICLES, ONE PLACE.</strong>
+                <p>Add your vehicle details once and make your next service booking easier.</p>
+            </div>
+        </div>
+    </aside>
 
-<body>
+    <main class="ap-main">
+        <div class="ap-topbar">
+            <div class="ap-breadcrumb">Customer Portal <span>/ Add Vehicle</span></div>
+            <div class="ap-status"><span class="ap-dot"></span> CUSTOMER AREA</div>
+        </div>
 
-<div class="container">
+        <header class="ap-heading">
+            <div class="ap-eyebrow">YOUR GARAGE · 01</div>
+            <h1>Add Your Vehicle</h1>
+            <p>Save your vehicle details to make booking and managing services simpler.</p>
+        </header>
 
-    <div class="form-box">
-
-        <h1>AUTOLUX</h1>
-
-        <h2>Add Your Vehicle</h2>
-
-        <form action="add-vehicle" method="post">
-
-            <label>Vehicle Number</label>
-
-            <input type="text"
-                   name="vehicleNumber"
-                   placeholder="e.g. MH12AB1234"
-                   required>
-
-            <label>Vehicle Type</label>
-
-            <select name="vehicleType" required>
-
-                <option value="">Select Vehicle Type</option>
-
-                <option value="Car">Car</option>
-
-                <option value="Bike">Bike</option>
-
-                <option value="Scooter">Scooter</option>
-
-                <option value="Other">Other</option>
-
-            </select>
-
-            <label>Vehicle Model</label>
-
-            <input type="text"
-                   name="model"
-                   placeholder="e.g. Honda City"
-                   required>
-
-            <button type="submit">
-                Add Vehicle
-            </button>
-
-        </form>
-
-        <p>
-            <a href="dashboard.html">Back to Dashboard</a>
-        </p>
-
-    </div>
-
+        <section class="ap-card">
+            <form action="add-vehicle" method="post">
+                <div class="ap-form-grid">
+                    <div class="ap-field full">
+                        <label for="vehicleNumber">Vehicle Number</label>
+                        <input id="vehicleNumber" type="text" name="vehicleNumber"
+                               placeholder="e.g. MH12AB1234" autocomplete="off" required>
+                        <p class="ap-hint">Enter your vehicle registration number.</p>
+                    </div>
+                    <div class="ap-field">
+                        <label for="vehicleType">Vehicle Type</label>
+                        <select id="vehicleType" name="vehicleType" required>
+                            <option value="">Select Vehicle Type</option>
+                            <option value="Car">Car</option>
+                            <option value="Bike">Bike</option>
+                            <option value="Scooter">Scooter</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="ap-field">
+                        <label for="model">Vehicle Model</label>
+                        <input id="model" type="text" name="model"
+                               placeholder="e.g. Honda City" required>
+                    </div>
+                </div>
+                <div class="ap-form-actions">
+                    <button class="ap-primary" type="submit">Add Vehicle <span>→</span></button>
+                    <a class="ap-back" href="dashboard.html">← Back to Dashboard</a>
+                </div>
+            </form>
+        </section>
+    </main>
 </div>
-
 </body>
-
 </html>
