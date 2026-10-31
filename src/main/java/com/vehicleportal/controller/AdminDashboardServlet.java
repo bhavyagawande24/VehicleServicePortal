@@ -75,17 +75,14 @@ public class AdminDashboardServlet extends HttpServlet {
 <title>Admin Dashboard - AUTOLUX</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
     padding: 30px 20px;
     font-family: Arial, Helvetica, sans-serif;
-    background: #eef4ff;
-    color: #1e293b;
+    background: #080a08;
+    color: #f5f7f8;
 }
 
 .dashboard {
@@ -94,159 +91,137 @@ body {
 }
 
 .header {
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: white;
+    background: linear-gradient(135deg, #111411, #202820);
+    color: #f5f7f8;
     padding: 32px;
-    border-radius: 16px;
-    margin-bottom: 25px;
-    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.20);
+    border: 1px solid #46513b;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.3);
 }
 
-.header h1 {
-    margin: 0 0 8px;
-    font-size: 34px;
-}
-
-.header p {
-    margin: 0;
-    font-size: 17px;
-    opacity: 0.95;
-}
+.header h1 { color: #c6ff00; margin-top: 0; }
+.header p { color: #a8b0b4; }
 
 .section {
-    background: white;
-    padding: 25px;
-    margin-bottom: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(30, 58, 138, 0.09);
+    background: #111411;
+    color: #f5f7f8;
+    border: 1px solid #303b40;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 22px auto;
+    max-width: 1200px;
     overflow-x: auto;
 }
 
-.section h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #1e3a8a;
-    font-size: 24px;
+.section h2 { color: #c6ff00; margin-top: 0; }
+
+#autolux-admin-summary > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.stat-card {
+    flex: 1 1 150px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #1c241b;
+    border: 1px solid #46513b;
+    color: #c6ff00;
+    min-width: 130px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.stat-card strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 30px;
+    color: #f5f7f8;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
     min-width: 650px;
-}
-
-th,
-td {
-    padding: 13px;
-    border-bottom: 1px solid #e2e8f0;
-    text-align: left;
+    border-collapse: collapse;
+    background: #111411;
+    color: #f5f7f8;
 }
 
 th {
-    background: #1e3a8a;
-    color: white;
+    background: #202820;
+    color: #c6ff00;
+    text-align: left;
+    padding: 14px;
+    border-bottom: 1px solid #46513b;
 }
 
-tr:nth-child(even) {
-    background: #f8fafc;
+td {
+    padding: 13px;
+    border-bottom: 1px solid #303b40;
+    color: #d9dfda;
 }
 
-tr:hover {
-    background: #eff6ff;
-}
-
-select {
-    padding: 9px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-    background: white;
-    color: #1e293b;
-    font-size: 14px;
-}
-
-select:focus {
-    border-color: #2563eb;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-}
+tr:hover td { background: #1b211d; }
 
 button {
-    padding: 9px 14px;
-    margin-left: 5px;
+    background: #c6ff00;
+    color: #080a08;
     border: none;
-    border-radius: 7px;
-    background: #2563eb;
-    color: white;
-    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px 16px;
     font-weight: bold;
+    cursor: pointer;
 }
 
-button:hover {
-    background: #1d4ed8;
+button:hover { background: #dcff70; }
+
+select, input {
+    background: #1b211d;
+    color: #f5f7f8;
+    border: 1px solid #46513b;
+    border-radius: 7px;
+    padding: 9px;
 }
+
+select:focus, input:focus {
+    outline: 1px solid #c6ff00;
+}
+
+.status-pending { color: #ffd166; }
+.status-approved { color: #c6ff00; }
+.status-completed { color: #65d68e; }
+.status-cancelled { color: #ff7777; }
+
+a { color: #c6ff00; }
+a:hover { color: #dcff70; }
 
 .logout {
     display: inline-block;
-    padding: 13px 22px;
-    background: #dc2626;
-    color: white;
+    margin: 20px 0;
+    padding: 11px 20px;
+    background: #c6ff00;
+    color: #080a08;
+    border-radius: 8px;
+    font-weight: bold;
     text-decoration: none;
-    border-radius: 9px;
-    font-weight: bold;
-    margin-bottom: 20px;
 }
 
-.logout:hover {
-    background: #b91c1c;
-}
-
-.status-pending {
-    color: #b45309;
-    font-weight: bold;
-}
-
-.status-approved {
-    color: #2563eb;
-    font-weight: bold;
-}
-
-.status-completed {
-    color: #15803d;
-    font-weight: bold;
-}
-
-.status-cancelled {
-    color: #dc2626;
-    font-weight: bold;
-}
+.logout:hover { background: #dcff70; }
 
 .footer {
     text-align: center;
-    color: #64748b;
-    padding: 10px;
+    color: #929b95;
+    padding: 18px;
     font-size: 14px;
 }
 
 @media (max-width: 600px) {
-
-    body {
-        padding: 15px 10px;
-    }
-
-    .header {
-        padding: 24px;
-    }
-
-    .header h1 {
-        font-size: 28px;
-    }
-
-    .section {
-        padding: 18px;
-    }
-
+    body { padding: 15px 10px; }
+    .header { padding: 24px; }
+    .header h1 { font-size: 28px; }
+    .section { padding: 16px; }
 }
-
 </style>
 
 </head>
@@ -256,11 +231,11 @@ button:hover {
 <div class="section" id="autolux-admin-summary">
 <h2>AUTOLUX LIVE DATABASE STATS</h2>
 <div style="display:flex;flex-wrap:wrap;gap:14px">
-<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">TOTAL BOOKINGS<br><strong>" + totalBookings + "</strong></div>
-<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">PENDING<br><strong>" + pendingBookings + "</strong></div>
-<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">CONFIRMED / IN PROGRESS<br><strong>" + confirmedBookings + "</strong></div>
-<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">COMPLETED<br><strong>" + completedBookings + "</strong></div>
-<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">REGISTERED USERS<br><strong>" + totalUsers + "</strong></div>
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">TOTAL BOOKINGS<br><strong>__TOTAL_BOOKINGS__</strong></div>
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">PENDING<br><strong>__PENDING_BOOKINGS__</strong></div>
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">CONFIRMED / IN PROGRESS<br><strong>__CONFIRMED_BOOKINGS__</strong></div>
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">COMPLETED<br><strong>__COMPLETED_BOOKINGS__</strong></div>
+<div style="padding:18px;border-radius:10px;background:#1c1e19;color:#c6ff00;min-width:130px">REGISTERED USERS<br><strong>__TOTAL_USERS__</strong></div>
 </div></div>
 <div class="dashboard">
 
@@ -619,7 +594,14 @@ AUTOLUX • Admin Panel
 </html>
 """);
 
-            response.getWriter().println(html);
+            String dashboardHtml = html.toString()
+                    .replace("__TOTAL_BOOKINGS__", String.valueOf(totalBookings))
+                    .replace("__PENDING_BOOKINGS__", String.valueOf(pendingBookings))
+                    .replace("__CONFIRMED_BOOKINGS__", String.valueOf(confirmedBookings))
+                    .replace("__COMPLETED_BOOKINGS__", String.valueOf(completedBookings))
+                    .replace("__TOTAL_USERS__", String.valueOf(totalUsers));
+
+            response.getWriter().println(dashboardHtml);
 
         } catch (Exception e) {
 
